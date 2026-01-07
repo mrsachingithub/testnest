@@ -92,6 +92,17 @@ def create_app():
     
     with app.app_context():
         db.create_all()
+        
+        # Auto-seed if database is empty (for Render Free Tier)
+        try:
+            from models import User
+            if not User.query.first():
+                print("Database empty, running auto-seed...")
+                from seed_verification_data import seed_data
+                seed_data()
+        except Exception as e:
+            print(f"Auto-seed skipped: {e}")
+
     return app
 
 if __name__ == '__main__':
