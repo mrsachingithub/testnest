@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-accent mb-0">Exam Analytics</h2>
+            <p class="text-secondary-custom">View student performance and pass/fail stats</p>
+        </div>
+    </div>
+
+    <div id="examsContainer" class="row g-4">
+        <!-- Examiner exams for analytics will be injected here -->
+        <div class="col-12 text-center text-secondary-custom">
+            <div class="spinner-border text-accent" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Modal -->
+<div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content glass-card border-secondary text-light">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-accent">Exam Results</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover border-secondary mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-secondary-custom">Student</th>
+                                <th class="text-secondary-custom">Email</th>
+                                <th class="text-secondary-custom">Score</th>
+                                <th class="text-secondary-custom">Status</th>
+                                <th class="text-secondary-custom">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                            <!-- Rows injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load exams in 'analytics' mode
+        if (typeof loadExaminerExams === 'function') {
+            loadExaminerExams('analytics');
+        }
+    });
+</script>
+{% endblock %}

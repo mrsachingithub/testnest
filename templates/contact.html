@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="glass-card p-5 rounded-4 shadow-lg">
+                    <h2 class="fw-bold text-center mb-4">Get in Touch</h2>
+                    <p class="text-center text-secondary-custom mb-5">Have questions? We'd love to hear from you. Send
+                        us a message and we'll respond as soon as possible.</p>
+
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control bg-dark text-white border-secondary" id="name"
+                                    placeholder="John Doe">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control bg-dark text-white border-secondary" id="email"
+                                    placeholder="name@example.com">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="subject"
+                                placeholder="How can we help?">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control bg-dark text-white border-secondary" id="message" rows="5"
+                                placeholder="Your message here..."></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill fw-bold">Send
+                                Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 text-center">
+            <div class="col-md-4">
+                <h5 class="fw-bold">Email</h5>
+                <p class="text-secondary-custom">support@testnest.com</p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="fw-bold">Phone</h5>
+                <p class="text-secondary-custom">+1 (555) 123-4567</p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="fw-bold">Office</h5>
+                <p class="text-secondary-custom">123 Innovation Dr, Tech City, TC 90210</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TestNest - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet" />
+</head>
+
+<body class="d-flex align-items-center justify-content-center min-vh-100 bg-gradient">
+    <div class="glass-card p-5 rounded-4 shadow-lg" style="width: 400px;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold"
+                style="background: linear-gradient(to right, #00ffc8, #4e54c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                TestNest</h2>
+            <p class="text-secondary-custom">Secure Exam Portal</p>
+        </div>
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" required />
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="••••••••" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 fs-5">Login</button>
+        </form>
+        <div class="mt-4 text-center d-flex justify-content-between">
+            <a href="/forgot_password.html" class="text-secondary-custom text-decoration-none small hover-link">Forgot
+                Password?</a>
+            <a href="/signup.html" class="text-accent text-decoration-none fw-bold small hover-link">Create Account</a>
+        </div>
+        <div id="msg" class="mt-3 text-center"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>

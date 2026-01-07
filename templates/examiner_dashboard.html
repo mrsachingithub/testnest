@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-accent mb-0">Manage Exams</h2>
+            <p class="text-secondary-custom">Create, edit, or delete exams</p>
+        </div>
+        <a href="create_exam.html" class="btn btn-success shadow-lg">+ Create New Exam</a>
+    </div>
+
+    <div id="examsContainer" class="row g-4">
+        <!-- Examiner exams for management will be injected here -->
+        <div class="col-12 text-center text-secondary-custom">
+            <div class="spinner-border text-accent" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Exam Details Modal -->
+<div class="modal fade" id="viewExamModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content glass-card border-secondary text-light">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-accent" id="viewExamTitle">Exam Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewExamMeta" class="text-secondary-custom mb-4"></p>
+                <div id="viewExamQuestions">
+                    <!-- Questions injected here -->
+                </div>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load exams in 'manage' mode
+        if (typeof loadExaminerExams === 'function') {
+            loadExaminerExams('manage');
+        }
+    });
+</script>
+{% endblock %}

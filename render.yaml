@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: testnest
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: flask db upgrade && gunicorn "app:create_app()"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: testnest-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: testnest-db
+    databaseName: testnest
+    user: testnest

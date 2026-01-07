@@ -1,0 +1,272 @@
+/* style.css - Premium Glassmorphism UI */
+:root {
+  --color-primary: #4e54c8;
+  --color-secondary: #8f94fb;
+  --color-accent: #00ffc8;
+  --color-danger: #ff4757;
+  --color-warning: #ffa502;
+  --color-success: #2ed573;
+  --color-bg-dark: #121212;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-surface-hover: rgba(255, 255, 255, 0.1);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body.bg-gradient {
+  background: linear-gradient(-45deg, #1cb5e0, #000046, #4e54c8, #8f94fb);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glass-shadow);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-secondary-custom {
+  color: var(--text-secondary);
+}
+
+/* Forms */
+.form-control,
+.form-select {
+  background: rgba(0, 0, 0, 0.2);
+  border: var(--glass-border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0, 255, 200, 0.25);
+  color: var(--text-primary);
+}
+
+.form-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  box-shadow: 0 4px 15px rgba(78, 84, 200, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(78, 84, 200, 0.6);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #eb3349, #f45c43);
+  box-shadow: 0 4px 15px rgba(244, 92, 67, 0.4);
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: var(--glass-border);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: linear-gradient(to right, var(--color-accent), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Exam Specifics */
+.card-exam {
+  background: var(--color-surface);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-exam:hover {
+  background: var(--color-surface-hover);
+  transform: translateY(-5px);
+}
+
+.timer {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-warning);
+  text-shadow: 0 0 10px rgba(255, 165, 2, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: var(--glass-border);
+}
+
+/* Question Area */
+.question-container {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  border: var(--glass-border);
+}
+
+.option-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.option-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-secondary);
+}
+
+.form-check-input:checked+.form-check-label {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.option-card.selected {
+  border-color: var(--color-accent);
+  background: rgba(0, 255, 200, 0.1);
+}
+
+/* Result Page */
+.result-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0 auto 2rem;
+  border: 4px solid var(--color-surface);
+}
+
+.result-pass {
+  border-color: var(--color-success);
+  color: var(--color-success);
+  box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
+}
+
+.result-fail {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
+}
+
+/* Utilities */
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Footer */
+.glass-footer {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: var(--glass-border);
+  color: var(--text-secondary);
+}
+
+.hover-link:hover {
+  color: var(--color-accent) !important;
+  padding-left: 5px;
+  transition: all 0.2s ease;
+}

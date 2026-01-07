@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="glass-card p-5 rounded-4 mx-auto" style="max-width: 800px;">
+        <h2 class="text-accent fw-bold text-center mb-4">Exam Instructions & System Check</h2>
+
+        <div class="mb-5">
+            <h4 class="fw-bold mb-3">Guidelines</h4>
+            <ul class="list-group list-group-flush bg-transparent">
+                <li class="list-group-item bg-transparent text-light border-secondary">
+                    <i class="fas fa-check-circle text-success me-2"></i> Ensure you are in a quiet room with good
+                    lighting.
+                </li>
+                <li class="list-group-item bg-transparent text-light border-secondary">
+                    <i class="fas fa-check-circle text-success me-2"></i> Close all other tabs and applications.
+                </li>
+                <li class="list-group-item bg-transparent text-light border-secondary">
+                    <i class="fas fa-exclamation-triangle text-warning me-2"></i> Switching tabs or minimizing the
+                    window will be flagged as suspicious.
+                </li>
+                <li class="list-group-item bg-transparent text-light border-secondary">
+                    <i class="fas fa-video text-primary me-2"></i> Your camera must stay on throughout the exam.
+                </li>
+            </ul>
+        </div>
+
+        <div class="mb-5">
+            <h4 class="fw-bold mb-3">System Compatibility Check</h4>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div id="check-internet" class="p-3 border border-secondary rounded text-center bg-dark">
+                        <i class="fas fa-wifi fs-3 mb-2 text-secondary"></i>
+                        <h6 class="mb-0">Internet Connection</h6>
+                        <small class="status-text text-muted">Checking...</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="check-camera" class="p-3 border border-secondary rounded text-center bg-dark">
+                        <i class="fas fa-camera fs-3 mb-2 text-secondary"></i>
+                        <h6 class="mb-0">Camera Access</h6>
+                        <small class="status-text text-muted">Checking...</small>
+                    </div>
+                </div>
+            </div>
+            <div id="camera-preview-container" class="mt-3 text-center d-none">
+                <video id="camera-preview" autoplay playsinline
+                    style="width: 100%; max-width: 320px; border-radius: 8px; border: 2px solid #333;"></video>
+                <p class="small text-muted mt-1">If you can see yourself, your camera is working.</p>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div id="error-msg" class="text-danger fw-bold mb-3"></div>
+            <button id="startExamBtn" class="btn btn-primary btn-lg px-5 rounded-pill" disabled>
+                I Agree & Start Exam
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const internetEl = document.getElementById('check-internet');
+        const cameraEl = document.getElementById('check-camera');
+        const startBtn = document.getElementById('startExamBtn');
+        const errorMsg = document.getElementById('error-msg');
+        let checksPassed = { internet: false, camera: false };
+
+        function updateStatus(el, pass, msg) {
+            const icon = el.querySelector('i');
+            const txt = el.querySelector('.status-text');
+            if (pass) {
+                el.classList.remove('border-secondary');
+                el.classList.add('border-success');
+                icon.className = icon.className.replace('text-secondary', 'text-success');
+                txt.textContent = 'Passed';
+                txt.className = 'status-text text-success fw-bold';
+            } else {
+                el.classList.remove('border-secondary');
+                el.classList.add('border-danger');
+                icon.className = icon.className.replace('text-secondary', 'text-danger');
+                txt.textContent = 'Failed: ' + msg;
+                txt.className = 'status-text text-danger fw-bold';
+            }
+            checkAll();
+        }
+
+        function checkAll() {
+            if (checksPassed.internet && checksPassed.camera) {
+                startBtn.disabled = false;
+                errorMsg.textContent = '';
+            } else {
+                startBtn.disabled = true;
+            }
+        }
+
+        // 1. Check Internet
+        if (navigator.onLine) {
+            checksPassed.internet = true;
+            updateStatus(internetEl, true);
+        } else {
+            updateStatus(internetEl, false, 'No Internet');
+        }
+        window.addEventListener('online', () => { checksPassed.internet = true; updateStatus(internetEl, true); });
+        window.addEventListener('offline', () => { checksPassed.internet = false; updateStatus(internetEl, false, 'No Internet'); });
+
+        // 2. Check Camera
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            checksPassed.camera = true;
+            updateStatus(cameraEl, true);
+
+            // Show preview
+            const video = document.getElementById('camera-preview');
+            document.getElementById('camera-preview-container').classList.remove('d-none');
+            video.srcObject = stream;
+
+        } catch (err) {
+            console.error(err);
+            checksPassed.camera = false;
+            updateStatus(cameraEl, false, 'Access Denied');
+            errorMsg.textContent = 'Please allow camera access to continue.';
+        }
+
+        // Handle Start
+        startBtn.addEventListener('click', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const examId = urlParams.get('exam_id');
+            if (examId) {
+                // Call the start exam function from app.js context or redirect logic
+                // Since this page is standalone, we invoke the global start logic via app.js
+                // But app.js isn't loaded here via block scripts? 
+                // We extended base.html so app.js is present.
+                // We need to trigger the actual exam start API call.
+                startAttemptFromInstructions(examId);
+            }
+        });
+    });
+</script>
+{% endblock %}
